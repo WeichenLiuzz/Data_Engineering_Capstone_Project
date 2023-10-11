@@ -3,13 +3,13 @@
 ## Table of Contents
 * **Scope of Works**
 * **Project Structure**
-- credit_card_etl.py
-- console_based_program.py
-- data_analysis_and_visualization.py
-- loan_application_etl.py
-- data_analysis_and_visualization_LOAN.py
-- requirements.txt
-- README.md
+    - credit_card_etl.py
+    - console_based_program.py
+    - data_analysis_and_visualization.py
+    - loan_application_etl.py
+    - data_analysis_and_visualization_LOAN.py
+    - requirements.txt
+    - README.md
 * **Data Sources & Description**
 * **Workflow Diagram**
 
