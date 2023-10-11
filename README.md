@@ -5,10 +5,10 @@
 This repository contains the capstone project for the CAP 350 - Data Engineering course, focusing on ETL processes for a Loan Application dataset and a Credit Card dataset using various technologies such as Python (Pandas, advanced modules, Matplotlib), SQL, and Apache Spark (Spark Core, Spark SQL), along with Python Visualization and Analytics libraries.
 
 ## Project Structure
-* **credit_card_etl.py:** Python script for ETL (Extraction, Transformation, Loading) process for Credit Card System. The ETL process involves extracting data from specified JSON files, transforming the data based on mapping document requirements, and loading it into a MySQL database.
+* **`credit_card_etl.py`:** Python script for ETL (Extraction, Transformation, Loading) process for Credit Card System. The ETL process involves extracting data from specified JSON files, transforming the data based on mapping document requirements, and loading it into a MySQL database.
 
 
-* **console_based_program.py:** Console-based Python program for displaying transaction and customer details.
+* **`console_based_program.py`:** Console-based Python program for displaying transaction and customer details.
 
     The Transaction Details Module fulfills the following functional requirements:
     1. Display transactions made by customers residing in a specified zip code for a given month and year. The display should be ordered by day in descending order.
@@ -21,7 +21,7 @@ This repository contains the capstone project for the CAP 350 - Data Engineering
     3. Generate a monthly bill for a credit card number for a specified month and year.
     4. Display the transactions made by a customer within a defined date range, ordering by year, month, and day in descending order.
 
-* **data_analysis_and_visualization.py:** Python script for data analysis and visualization for both datasets, including three visualizations.
+* **`data_analysis_and_visualization.py`:** Python script for data analysis and visualization for both datasets, including three visualizations.
 
     **Analyzing Transaction Types with Highest Transaction Count:**
     This part of the script focuses on visualizing the distribution of transaction types and determining the type with the highest transaction count.
