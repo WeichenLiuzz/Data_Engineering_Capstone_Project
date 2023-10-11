@@ -6,7 +6,7 @@ This repository contains the capstone project for the CAP 350 - Data Engineering
 
 ## Project Structure
 * **credit_card_etl.py:** Python script for ETL (Extraction, Transformation, Loading) process for Credit Card System. The ETL process involves extracting data from specified JSON files, transforming the data based on mapping document requirements, and loading it into a MySQL database.
-* **`console_based_program.py:`** Console-based Python program for displaying transaction and customer details.
+* **console_based_program.py:** Console-based Python program for displaying transaction and customer details.
 
     The Transaction Details Module fulfills the following functional requirements:
     1. Display transactions made by customers residing in a specified zip code for a given month and year. The display should be ordered by day in descending order.
