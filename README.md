@@ -14,7 +14,7 @@ This repository contains the capstone project for the CAP 350 - Data Engineering
     1. Display transactions made by customers residing in a specified zip code for a given month and year. The display should be ordered by day in descending order.
     2. Display the number and total values of transactions for a specific transaction type.
     3. Display the overall number and total values of transactions for branches located in a particular state.
-    
+
     **The Customer Details Module meets the following functional requirements:**
     1. Check the existing account details of a customer.
     2. Modify the existing account details of a customer.
@@ -24,7 +24,7 @@ This repository contains the capstone project for the CAP 350 - Data Engineering
 * **`data_analysis_and_visualization.py`:** Python script for data analysis and visualization for both datasets, including three visualizations.
 
     **Analyzing Transaction Types with Highest Transaction Count:**
-    This part of the script focuses on visualizing the distribution of transaction types and determining the type with the highest transaction count.
+    This part focuses on visualizing the distribution of transaction types and determining the type with the highest transaction count.
     1. Aggregate the transaction counts based on their types.
     2. Plot the transaction types against their respective counts.
 
@@ -40,7 +40,7 @@ This repository contains the capstone project for the CAP 350 - Data Engineering
 
 
 
-* **`loan_application_etl.py`:** Python script for ETL process for Loan Application dataset.
+* **`loan_application_etl.py`:** Python script for ETL process for Loan Application dataset. This part includes creating a Python program to retrieve data from a specified API endpoint, checking the status code of the API, and utilizing PySpark to load this data into an RDBMS table named `CDW_SAPP_loan_application` within the `creditcard_capstone` database.
 
 
 * **`requirements.txt:`** List of required Python libraries for the project.
@@ -52,6 +52,8 @@ This repository contains the capstone project for the CAP 350 - Data Engineering
 * **CDW_SAPP_CREDITCARD.JSON:** This JSON file contains data related to credit card transactions within the Credit Card System. Fields include BRANCH_CODE, CREDIT_CARD_NO, CUST_SSN, TRANSACTION_ID, TRANSACTION_TYPE, TRANSACTION_VALUE and TIMEID. This table name in `creditcard_capston` Database is `CDW_SAPP_CREDIT_CARD`.
 
 * **CDW_SAPP_CUSTOMER.JSON:** This JSON file contains data related to customers of the Credit Card System. Fields include CREDIT_CARD_NO, CUST_CITY, CUST_COUNTRY, CUST_EMAIL, CUST_PHONE, CUST_STATE, CUST_ZIP, FIRST_NAME, LAST_NAME, LAST_UPDATED, MIDDLE_NAME, SSN and FULL_STREET_ADDRESS. This table name in `creditcard_capston` Database is `CDW_SAPP_CUSTOMER`.
+
+* **CDW_SAPP_LOAN_APPLICATION:** This data file contains data related to loan applications. Fields include Application_ID, Gender, Married, Dependents, Education, Self_Employed, Credit_History, Property_Area, Income and Application_Status. This table name in the `creditcard_capstone` Database is `CDW_SAPP_LOAN_APPLICATION`.
 
 ## Workflow Diagram
 For a visual representation of the project workflow and application requirements, refer to the workflow diagram.<img src="schema.png"/>
