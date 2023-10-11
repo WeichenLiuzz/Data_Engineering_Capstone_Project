@@ -3,15 +3,16 @@
 ## Table of Contents
 * **Scope of Works**
 * **Project Structure**
-    - credit_card_etl.py
-    - console_based_program.py
-    - data_analysis_and_visualization.py
-    - loan_application_etl.py
-    - data_analysis_and_visualization_LOAN.py
-    - requirements.txt
-    - README.md
+    - `credit_card_etl.py`
+    - `console_based_program.py`
+    - `data_analysis_and_visualization.py`
+    - `loan_application_etl.py`
+    - `data_analysis_and_visualization_LOAN.py`
+    - `requirements.txt`
+    - `README.md`
 * **Data Sources & Description**
 * **Workflow Diagram**
+* **Conclusion**
 
 
 ## Scope of Works
@@ -21,35 +22,23 @@ This repository contains the capstone project for the CAP 350 - Data Engineering
 ## Project Structure
 * **`credit_card_etl.py`:** Python script for ETL (Extraction, Transformation, Loading) process for Credit Card System. The ETL process involves extracting data from specified JSON files, transforming the data based on mapping document requirements, and loading it into a MySQL database.
 
-* **`console_based_program.py`:** Console-based Python program for displaying transaction and customer details.
+* **`console_based_program.py`:** Console-based Python program for displaying transaction and customer details. This module fulfills various functional requirements related to transaction and customer details display.
 
-    **The Transaction Details Module fulfills the following functional requirements:**
-    1. Display transactions made by customers residing in a specified zip code for a given month and year. The display should be ordered by day in descending order.
-    2. Display the number and total values of transactions for a specific transaction type.
-    3. Display the overall number and total values of transactions for branches located in a particular state.
+    The Transaction Details Module fulfills the following functional requirements:
+    - Display transactions made by customers residing in a specified zip code for a given month and year. The display should be ordered by day in descending order.
+    - Display the number and total values of transactions for a specific transaction type.
+    - Display the overall number and total values of transactions for branches located in a particular state.
 
-    **The Customer Details Module meets the following functional requirements:**
-    1. Check the existing account details of a customer.
-    2. Modify the existing account details of a customer.
-    3. Generate a monthly bill for a credit card number for a specified month and year.
-    4. Display the transactions made by a customer within a defined date range, ordering by year, month, and day in descending order.
+    The Customer Details Module meets the following functional requirements:
+    - Check the existing account details of a customer.
+    - Modify the existing account details of a customer.
+    - Generate a monthly bill for a credit card number for a specified month and year.
+    - Display the transactions made by a customer within a defined date range, ordering by year, month, and day in descending order.
 
-* **`data_analysis_and_visualization.py`:** Python script for data analysis and visualization for credit card system, including three visualizations.
-
-    **Analyzing Transaction Types with Highest Transaction Count:**
-    This part focuses on visualizing the distribution of transaction types and determining the type with the highest transaction count.
-    1. Aggregate the transaction counts based on their types.
-    2. Plot the transaction types against their respective counts.
-
-    **Identifying States with a High Customer Count:** 
-    This visualization helps to identify the state with the highest customer count.
-    1. Aggregate the customer count for each state
-    2. Plot the states against their respective customer counts.
-
-    **Summing Transactions for the Top 10 Customers:** 
-    This section involves plotting the total transaction amounts for the top 10 customers and identifying the customer with the highest transaction amount.
-    1. Group the data by CUST_SSN, calculate the total transaction amounts for each customer, and sort the results in descending order.
-    2. Select the top 10 customers based on their transaction amounts
+* **`data_analysis_and_visualization.py`:** Python script for data analysis and visualization for the credit card system. It includes three visualizations:
+    - Analyzing Transaction Types with Highest Transaction Count
+    - Identifying States with a High Customer Count
+    - Summing Transactions for the Top 10 Customers
 
 * **`loan_application_etl.py`:** Python script for ETL process for Loan Application dataset. This part includes creating a Python program to retrieve data from a specified API endpoint, checking the status code of the API, and utilizing PySpark to load this data into an RDBMS table named `CDW_SAPP_loan_application` within the `creditcard_capstone` database.
 
