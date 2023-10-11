@@ -20,7 +20,7 @@ This repository contains the capstone project for the CAP 350 - Data Engineering
     3. Generate a monthly bill for a credit card number for a specified month and year.
     4. Display the transactions made by a customer within a defined date range, ordering by year, month, and day in descending order.
 
-* **`data_analysis_and_visualization.py`:** Python script for data analysis and visualization for both datasets, including three visualizations.
+* **`data_analysis_and_visualization.py`:** Python script for data analysis and visualization for credit card system, including three visualizations.
 
     **Analyzing Transaction Types with Highest Transaction Count:**
     This part focuses on visualizing the distribution of transaction types and determining the type with the highest transaction count.
@@ -39,6 +39,19 @@ This repository contains the capstone project for the CAP 350 - Data Engineering
 
 * **`loan_application_etl.py`:** Python script for ETL process for Loan Application dataset. This part includes creating a Python program to retrieve data from a specified API endpoint, checking the status code of the API, and utilizing PySpark to load this data into an RDBMS table named `CDW_SAPP_loan_application` within the `creditcard_capstone` database.
 
+* **`data_analysis_and_visualization_LOAN.py`:** Python script for data analysis and visualization for LOAN Application, including four visualizations.
+
+    **Percentage of Applications Approved for Self-Employed Applicants:**
+    The task involves analyzing the loan application data to determine the percentage of approvals for self-employed applicants. This outcome is presented in a pie chart for clear visualization.
+
+    **Percentage of Rejections for Married Male Applicants:** 
+    This part identifies the percentage of rejections for married male applicants. The result is presented in a pie chart for a visual representation.
+
+    **Top Three Months with Highest Transaction Volume:** 
+    This requirement analyzes the top three months with the highest transaction volume. The data is grouped by month and year, and the top three months with the highest transaction volume is presented in a bar chart.
+
+    **Branch with the Highest Healthcare Transaction Value:**
+    The objective is to ascertain the branch that processed the highest total dollar value of healthcare transactions. The analysis involves aggregating transaction values by branch and identifying the branch with the maximum value. This information is visually conveyed using a bar chart.
 
 * **`requirements.txt:`** List of required Python libraries for the project.
 * **`README.md:`** Project documentation explaining details, development comments, technical challenges, and workflow diagrams.
