@@ -1,8 +1,22 @@
 # CAP 350 - Data Engineering Capstone Project
 
 ## Table of Contents
-* **Scope of Works :**
+* **Scope of Works**
+* **Project Structure**
+- credit_card_etl.py
+- console_based_program.py
+- data_analysis_and_visualization.py
+- loan_application_etl.py
+- data_analysis_and_visualization_LOAN.py
+- requirements.txt
+- README.md
+* **Data Sources & Description**
+* **Workflow Diagram**
+
+
+## Scope of Works
 This repository contains the capstone project for the CAP 350 - Data Engineering course, focusing on ETL processes for a Loan Application dataset and a Credit Card dataset using various technologies such as Python (Pandas, advanced modules, Matplotlib), SQL, and Apache Spark (Spark Core, Spark SQL), along with Python Visualization and Analytics libraries.
+
 
 ## Project Structure
 * **`credit_card_etl.py`:** Python script for ETL (Extraction, Transformation, Loading) process for Credit Card System. The ETL process involves extracting data from specified JSON files, transforming the data based on mapping document requirements, and loading it into a MySQL database.
