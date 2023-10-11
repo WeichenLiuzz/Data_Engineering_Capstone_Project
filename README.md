@@ -13,7 +13,6 @@ This repository contains the capstone project for the CAP 350 - Data Engineering
     1. Display transactions made by customers residing in a specified zip code for a given month and year. The display should be ordered by day in descending order.
     2. Display the number and total values of transactions for a specific transaction type.
     3. Display the overall number and total values of transactions for branches located in a particular state.
-
     **The Customer Details Module meets the following functional requirements:**
     1. Check the existing account details of a customer.
     2. Modify the existing account details of a customer.
