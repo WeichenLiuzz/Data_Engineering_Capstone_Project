@@ -12,6 +12,7 @@
     - `README.md`
 * **Data Sources & Description**
 * **Workflow Diagram**
+* **Challenges and Comments**
 * **Conclusion**
 
 
