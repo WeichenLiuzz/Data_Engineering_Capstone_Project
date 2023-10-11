@@ -6,6 +6,8 @@ This repository contains the capstone project for the CAP 350 - Data Engineering
 
 ## Project Structure
 * **credit_card_etl.py:** Python script for ETL (Extraction, Transformation, Loading) process for Credit Card System. The ETL process involves extracting data from specified JSON files, transforming the data based on mapping document requirements, and loading it into a MySQL database.
+
+
 * **console_based_program.py:** Console-based Python program for displaying transaction and customer details.
 
     The Transaction Details Module fulfills the following functional requirements:
@@ -19,14 +21,28 @@ This repository contains the capstone project for the CAP 350 - Data Engineering
     3. Generate a monthly bill for a credit card number for a specified month and year.
     4. Display the transactions made by a customer within a defined date range, ordering by year, month, and day in descending order.
 
+* **data_analysis_and_visualization.py:** Python script for data analysis and visualization for both datasets, including three visualizations.
 
+    **Analyzing Transaction Types with Highest Transaction Count:**
+    This part of the script focuses on visualizing the distribution of transaction types and determining the type with the highest transaction count.
+    1. Aggregate the transaction counts based on their types.
+    2. Plot the transaction types against their respective counts.
 
+    **Identifying States with a High Customer Count:** 
+    This visualization helps to identify the state with the highest customer count.
+    1. Aggregate the customer count for each state
+    2. Plot the states against their respective customer counts.
+
+    **Summing Transactions for the Top 10 Customers:** 
+    This section involves plotting the total transaction amounts for the top 10 customers and identifying the customer with the highest transaction amount.
+    1. Group the data by CUST_SSN, calculate the total transaction amounts for each customer, and sort the results in descending order.
+    2. Select the top 10 customers based on their transaction amounts
 
 
 
 * **`loan_application_etl.py`:** Python script for ETL process for Loan Application dataset.
 
-* **`data_analysis_and_visualization.py:`** Python script for data analysis and visualization for both datasets.
+
 * **`requirements.txt:`** List of required Python libraries for the project.
 * **`README.md:`** Project documentation explaining details, development comments, technical challenges, and workflow diagrams.
 
