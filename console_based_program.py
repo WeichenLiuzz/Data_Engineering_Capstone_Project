@@ -3,8 +3,6 @@ import mysql.connector
 import wc_credential
 from mysql.connector import Error
 
-# Sample database connection using mysql.connector
-# Replace this with your actual database connection details
 conn = mysql.connector.connect(
     host='localhost',
     user= wc_credential.mysql_username,
