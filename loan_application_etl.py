@@ -1,4 +1,4 @@
-# REQ 4.1 Create a Python program to GET (consume) data from the above API endpoint for the loan application dataset.
+# REQ 4.1 Create a Python program to GET (consume) data from the API endpoint for the loan application dataset.
 import requests
 import pandas as pd
 import pyspark
