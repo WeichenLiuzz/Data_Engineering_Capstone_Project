@@ -8,6 +8,7 @@
     - `data_analysis_and_visualization.py`
     - `loan_application_etl.py`
     - `data_analysis_and_visualization_LOAN.py`
+    - `capstone_weichenl.py`
     - `requirements.txt`
     - `README.md`
 * **Data Sources & Description**
@@ -48,7 +49,7 @@ This repository contains the capstone project for the CAP 350 - Data Engineering
     - Top Three Months with Highest Transaction Volume
     - Branch with the Highest Healthcare Transaction Value
 
-* **`capstone_weichenl.py`:** This Python script serves as the project's central hub, encompassing the complete codebase. It integrates ETL processes, data analysis, and visualization functionalities, ensuring a unified and efficient workflow across the entire project.
+* **`capstone_weichenl.py`:** This Python script contains the entirety of the project's code, incorporating the content from the subsequent files: `credit_card_etl.py`, `console_based_program.py`, `data_analysis_and_visualization.py`, `loan_application_etl.py`, `data_analysis_and_visualization_LOAN.py`.
 * **`requirements.txt:`** List of required Python libraries for the project.
 * **`README.md:`** This documentation provides a detailed overview of the project, including its scope, structure, data sources, and a workflow diagram illustrating the project's flow.
 
