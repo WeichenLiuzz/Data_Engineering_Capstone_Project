@@ -48,6 +48,7 @@ This repository contains the capstone project for the CAP 350 - Data Engineering
     - Top Three Months with Highest Transaction Volume
     - Branch with the Highest Healthcare Transaction Value
 
+* **`capstone_weichenl.py`:** This Python script serves as the project's central hub, encompassing the complete codebase. It integrates ETL processes, data analysis, and visualization functionalities, ensuring a unified and efficient workflow across the entire project.
 * **`requirements.txt:`** List of required Python libraries for the project.
 * **`README.md:`** This documentation provides a detailed overview of the project, including its scope, structure, data sources, and a workflow diagram illustrating the project's flow.
 
