@@ -9,6 +9,7 @@
     - `loan_application_etl.py`
     - `data_analysis_and_visualization_LOAN.py`
     - `capstone_weichenl.py`
+    - `visualizations`
     - `requirements.txt`
     - `README.md`
 * **Data Sources & Description**
@@ -53,6 +54,9 @@ This repository contains the capstone project for the CAP 350 - Data Engineering
 * **`requirements.txt:`** List of required Python libraries for the project.
 * **`README.md:`** This documentation provides a detailed overview of the project, including its scope, structure, data sources, and a workflow diagram illustrating the project's flow.
 
+## Workflow Diagram
+For a visual representation of the project workflow and application requirements, refer to the workflow diagram.<img src="schema.png"/>
+
 ## Data Sources & Description
 * **CDW_SAPP_BRANCH.JSON:** This JSON file contains data related to branches of the Credit Card System. Fields include BRANCH_CITY, BRANCH_CODE, BRANCH_NAME, BRANCH_STATE, BRANCH_STREET, BRANCH_ZIP and LAST_UPDATED. This table name in `creditcard_capston` Database is `CDW_SAPP_BRANCH`.
 
@@ -62,8 +66,9 @@ This repository contains the capstone project for the CAP 350 - Data Engineering
 
 * **CDW_SAPP_LOAN_APPLICATION:** This data file contains data related to loan applications. Fields include Application_ID, Gender, Married, Dependents, Education, Self_Employed, Credit_History, Property_Area, Income and Application_Status. This table name in the `creditcard_capstone` Database is `CDW_SAPP_LOAN_APPLICATION`.
 
-## Workflow Diagram
-For a visual representation of the project workflow and application requirements, refer to the workflow diagram.<img src="schema.png"/>
+
+## Visualizations
+This section encompasses the conclusive visual outputs generated from this project. It comprises a total of 7 images, consisting of five bar charts and two pie charts.<img src="visualizations/Customer Count by State.png"/>
 
 ## Challenges and Comments
 The project involved challenges related to data extraction, transformation, and loading, especially handling diverse data formats and ensuring data accuracy. Additionally, integrating and utilizing various libraries for efficient analysis and visualization required careful consideration and experimentation.
