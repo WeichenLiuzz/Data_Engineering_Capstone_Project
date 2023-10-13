@@ -9,7 +9,6 @@
     - `loan_application_etl.py`
     - `data_analysis_and_visualization_LOAN.py`
     - `capstone_weichenl.py`
-    - `visualizations`
     - `requirements.txt`
     - `README.md`
 * **Data Sources & Description**
