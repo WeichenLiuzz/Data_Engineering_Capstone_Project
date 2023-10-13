@@ -176,14 +176,6 @@ cursor = conn.cursor()
 
 # use triple quotes (""") to define a multi-line string
 
-
-""" The f is used to create a formatted SQL query string. 
-It allows embedding Python variables (year, month, and zip_code) directly into the SQL query 
-to create a dynamic query based on the input provided to the function. 
-The expressions inside curly braces {} are replaced with the values of the corresponding variables.
- """
-
-
 def display_transactions_by_zip(year, month, zip_code):
     query = f"""
     SELECT *
@@ -203,9 +195,11 @@ def display_transactions_by_zip(year, month, zip_code):
         for transaction in transactions:
             print(transaction)
 
-
-
-
+""" The f is used to create a formatted SQL query string. 
+It allows embedding Python variables (year, month, and zip_code) directly into the SQL query 
+to create a dynamic query based on the input provided to the function. 
+The expressions inside curly braces {} are replaced with the values of the corresponding variables.
+ """
 
 # Function to display the number and total values of transactions for a given type
 def display_transactions_by_type(transaction_type):
@@ -221,14 +215,6 @@ def display_transactions_by_type(transaction_type):
         total_value_str = "{:.2f}".format(total_value)  # Convert to string with 2 decimal places
         print(f"Number of {transaction_type} transactions: {num_transactions}")
         print(f"Total value of {transaction_type} transactions: {total_value_str}")
-
-
-
-
-
-
-
-
 
 # Function to display the total number and total values of transactions for branches in a given state
 def display_transactions_by_state(state):
@@ -248,11 +234,7 @@ def display_transactions_by_state(state):
         total_value = result[1]
         total_value_str = "{:.2f}".format(total_value)  # Convert to string with 2 decimal places
         print(f"Total number of transactions in {state}: {num_transactions}")
-        print(f"Total value of transactions in {state}: {total_value_str}")
-
-
-
-    
+        print(f"Total value of transactions in {state}: {total_value_str}")    
 
 if __name__ == "__main__":
     while True:
@@ -342,7 +324,6 @@ conn = mysql.connector.connect(
 
 cursor = conn.cursor()
 
-
 # Function to check existing account details of a customer
 def check_customer_account_details(first_name, middle_name, last_name):
     query = f"""
@@ -350,11 +331,9 @@ def check_customer_account_details(first_name, middle_name, last_name):
     FROM CDW_SAPP_CUSTOMER
     WHERE FIRST_NAME = '{first_name}' AND MIDDLE_NAME = '{middle_name}' AND LAST_NAME = '{last_name}';
     """
-
     cursor.execute(query)
     results = cursor.fetchall()
     
-
     if len(results) == 0:
         print("No customer found for the provided name.")
     elif len(results) == 1:
@@ -455,11 +434,8 @@ def generate_monthly_bill(credit_card_no, year, month):
         print("No transactions found for the provided credit card number, year, and month.")
         return
     
-
     # Initialize total_amount
     total_amount = 0
-    
-
     
     print("Monthly Bill:")
     print(f"Credit Card Number: {credit_card_no}")
@@ -588,14 +564,16 @@ def plot_transaction_values(transaction_types, total_transaction_values):
     # Plot the data
     plt.figure(figsize=(12, 6))
     bars = plt.bar(transaction_types, total_transaction_values, color='skyblue')
+    # Add numbers on the bars
     for bar, value in zip(bars, total_transaction_values):
         plt.text(bar.get_x() + bar.get_width() / 2, bar.get_height(), f'{value:.2f}', ha='center', va='bottom', color='black')
-    plt.ylim(min_total_transaction_value - 500, max_total_transaction_value + 500)
+    # Set y-axis limits
+    plt.ylim(min_total_transaction_value - 1000, max_total_transaction_value + 1000)
     plt.xlabel('Transaction Type')
     plt.ylabel('Total Transaction Value')
     plt.title('Total Transaction Value by Transaction Type')
-    plt.xticks(rotation=45)
-    plt.tight_layout()
+    plt.xticks(rotation=45) # Rotate x-axis labels for better readability
+    plt.tight_layout() # Ensure labels fit into the figure
     plt.show()
 
 def plot_customer_count(customer_count_by_state_sorted):
@@ -605,10 +583,10 @@ def plot_customer_count(customer_count_by_state_sorted):
     plt.xlabel('State')
     plt.ylabel('Customer Count')
     plt.title('Customer Count by State')
-    plt.xticks(rotation=45)
+    plt.xticks(rotation=45)  # Rotate x-axis labels for better visibility
     plt.show()
 
-
+# Print the highest customer count and its corresponding state
 def display_highest_customer_count_state(customer_count_by_state_sorted):
     highest_customer_count_state = customer_count_by_state_sorted.idxmax()
     highest_customer_count = customer_count_by_state_sorted.max()
@@ -623,22 +601,31 @@ conn.close()  # Close the database connection
 #cdw_sapp_credit_card_df.head()
 
 # Process transaction data
+# Group by transaction type and sum the transaction values for each type
 transaction_value_sum = cdw_sapp_credit_card_df.groupby('TRANSACTION_TYPE')['TRANSACTION_VALUE'].sum().reset_index()
+# Rename the column to 'Total Transaction Value'
 transaction_value_sum = transaction_value_sum.rename(columns={'TRANSACTION_VALUE': 'Total_Transaction_Value'})
+# Sort by total transaction value in descending order
 transaction_value_sum_sorted = transaction_value_sum.sort_values(by='Total_Transaction_Value', ascending=False)
+# Extract transaction types and total transaction values
 transaction_types = transaction_value_sum_sorted['TRANSACTION_TYPE'].tolist()
 total_transaction_values = transaction_value_sum_sorted['Total_Transaction_Value'].tolist()
+# Find the minimum and maximum values in the list
 min_total_transaction_value = np.min(total_transaction_values)
 max_total_transaction_value = np.max(total_transaction_values)
 
 # Plot transaction values
 plot_transaction_values(transaction_types, total_transaction_values)
 
+
 # Find and display the highest transaction value and type
+# Find the index of the maximum transaction value
 index_of_max_transaction_value = np.argmax(total_transaction_values)
+# Get the transaction type with the maximum transaction value
 highest_transaction_type = transaction_types[index_of_max_transaction_value]
 highest_transaction_value = total_transaction_values[index_of_max_transaction_value]
 print(f"Highest transaction value: {highest_transaction_value:.2f} for transaction type {highest_transaction_type}")
+
 
 
 # REQ 3.2 Find and plot which state has a high number of customers.
@@ -650,19 +637,28 @@ conn.close()  # Close the database connection
 #cdw_sapp_customer_df.head()
 
 # Process customer data
+# Count the number of customers in each state using "CUST_STATE"
 customer_count_by_state = cdw_sapp_customer_df['CUST_STATE'].value_counts()
+# Sort by customer count in descending order
 customer_count_by_state_sorted = customer_count_by_state.sort_values(ascending=False)
 
 # Plot customer count by state
 plot_customer_count(customer_count_by_state_sorted)
 display_highest_customer_count_state(customer_count_by_state_sorted)
 
+
+
 # REQ 3.3 Find and plot the sum of all transactions for the top 10 customers, and which customer has the highest transaction amount.
-transaction_sum_by_customer = cdw_sapp_credit_card_df.groupby('CUST_SSN').agg({'TRANSACTION_VALUE': 'sum'}).reset_index()
+# Group by customer SSN and sum the transaction values for each customer
+transaction_sum_by_customer = cdw_sapp_credit_card_df.groupby('CUST_SSN').agg({'TRANSACTION_VALUE': 'sum'}).reset_index() # Reset the index to make it a regular DataFrame
+# Rename the column to 'Total_Transaction_Amount'
 transaction_sum_by_customer = transaction_sum_by_customer.rename(columns={'TRANSACTION_VALUE': 'Total_Transaction_Amount'})
+# Sort by total transaction amount in descending order
 transaction_sum_by_customer_sorted = transaction_sum_by_customer.sort_values(by='Total_Transaction_Amount', ascending=False)
+# Select the top 10 customers
 top_10_customers = transaction_sum_by_customer_sorted.head(10)
 #print(top_10_customers)
+
 
 # Plot total transaction amount for top 10 customers
 plt.figure(figsize=(12, 6))
@@ -683,7 +679,7 @@ plt.xticks(range(len(top_10_customers)), [str(int(ssn)) for ssn in top_10_custom
 
 plt.show()
 
-# Display the highest transaction amount and the respective customer
+# Display the customer with the highest transaction amount
 customer_highest_transaction = top_10_customers.iloc[0]
 print(f"Customer SSN: {int(customer_highest_transaction['CUST_SSN'])} with the highest transaction amount {customer_highest_transaction['Total_Transaction_Amount']:.2f}")
 
@@ -726,7 +722,7 @@ status_code = get_api_status_code(api_endpoint)
 print("Status code:", status_code)
 
 
-# REQ 4.3 utilize PySpark to load data into RDBMS (SQL)
+# REQ 4.3 Utilize PySpark to load data into RDBMS (SQL)
 # Create a Spark session
 spark = SparkSession.builder.appName("LoanApplicationLoader").getOrCreate()
 
@@ -774,32 +770,45 @@ def fetch_data_and_create_df(sql_query):
 
 # REQ 5.1: Find and plot the percentage of applications approved for self-employed applicants.
 loan_data_df = fetch_data_and_create_df("SELECT * FROM cdw_sapp_loan_application;")
+# Filter the data for self-employed applicants
 self_employed_df = loan_data_df[loan_data_df['Self_Employed'] == 'Yes']
-percentage_approved = (self_employed_df['Application_Status'].value_counts(normalize=True) * 100)['Y']
+# Calculate the percentage of applications approved for self-employed applicants
+total_self_employed = len(self_employed_df)
+approved_self_employed = len(self_employed_df[self_employed_df['Application_Status'] == 'Y'])
+percentage_approved = (approved_self_employed / total_self_employed) * 100
+# percentage_approved = (self_employed_df['Application_Status'].value_counts(normalize=True) * 100)['Y']
 
+# Plot the percentage
 labels = ['Approved', 'Not Approved']
 sizes = [percentage_approved, 100 - percentage_approved]
-plt.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=140, labeldistance=0.85)
+plt.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=140, labeldistance=1.05)
 plt.title('Percentage of Applications Approved for Self-Employed Applicants')
-plt.axis('equal')
+plt.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
 plt.show()
 
 # REQ 5.2: Find the percentage of rejection for married male applicants.
+# Filter the data for married male applicants
 married_male_rejected = loan_data_df[(loan_data_df['Married'] == 'Yes') & (loan_data_df['Gender'] == 'Male') & (loan_data_df['Application_Status'] == 'N')]
-percentage_rejected = (len(married_male_rejected) / len(loan_data_df[(loan_data_df['Married'] == 'Yes') & (loan_data_df['Gender'] == 'Male')])) * 100
+# Calculate the percentage of rejections for married male applicants
+total_married_male = len(loan_data_df[(loan_data_df['Married'] == 'Yes') & (loan_data_df['Gender'] == 'Male')])
+percentage_rejected = (len(married_male_rejected) / total_married_male) * 100
 
+# Plot the percentage
 labels = ['Rejected', 'Approved']
 sizes = [percentage_rejected, 100 - percentage_rejected]
 plt.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=140)
-plt.title('Percentage of Rejections for Married Male Applicants')
+plt.title('Percentage of Rejections for Married Male Applicants') # Equal aspect ratio ensures that pie is drawn as a circle.
 plt.axis('equal')
 plt.show()
 
 # REQ 5.3: Find and plot the top three months with the largest volume of transaction data.
 cdw_sapp_credit_card_df = fetch_data_and_create_df("SELECT * FROM cdw_sapp_credit_card;")
+# Extract year and month from the 'TIMEID' column
 cdw_sapp_credit_card_df['Transaction_Year'] = cdw_sapp_credit_card_df['TIMEID'].str[:4]
 cdw_sapp_credit_card_df['Transaction_Month'] = cdw_sapp_credit_card_df['TIMEID'].str[4:6]
+# Group by year and month and sum the transaction values to get the transaction volume
 transaction_volume_by_month = cdw_sapp_credit_card_df.groupby(['Transaction_Year', 'Transaction_Month'])['TRANSACTION_VALUE'].sum()
+# Sort the transaction volume in descending order and select the top three
 top_three_months = transaction_volume_by_month.sort_values(ascending=False).head(3)
 
 plt.figure(figsize=(10, 6))
@@ -809,30 +818,38 @@ plt.xlabel('Month')
 plt.ylabel('Transaction Volume')
 plt.title('Top Three Months with the Largest Transaction Volume')
 
+# Annotate each bar with its value
 for p in ax.patches:
     ax.annotate(f'{p.get_height():,.0f}', (p.get_x() + p.get_width() / 2., p.get_height()), ha='center', va='bottom', fontsize=8, color='black', xytext=(0, 5), textcoords='offset points')
 
-plt.xticks(rotation=0)
+plt.xticks(rotation=0) # Remove rotation for month labels
 plt.tight_layout()
 plt.show()
 
 # REQ 5.4: Find and plot which branch processed the highest total dollar value of healthcare transactions.
+# Filter healthcare transactions
 healthcare_transactions = cdw_sapp_credit_card_df[cdw_sapp_credit_card_df['TRANSACTION_TYPE'] == 'Healthcare']
+# Group by branch and sum the transaction values for healthcare transactions
 healthcare_by_branch = healthcare_transactions.groupby('BRANCH_CODE')['TRANSACTION_VALUE'].sum()
+# Sort the DataFrame by transaction value in descending order and limit to top 10 branch
 sorted_healthcare_by_branch = healthcare_by_branch.sort_values(ascending=False).head(10)
 
+# Plot all transaction values using a bar plot
 plt.figure(figsize=(12, 6))
 sorted_healthcare_by_branch.plot(kind='bar', color='skyblue')
+# Set Y-axis limits to start from a value slightly lower than the minimum transaction value
 plt.ylim(sorted_healthcare_by_branch.min() - 1000, sorted_healthcare_by_branch.max() + 1000)
 plt.xlabel('Branch Code')
 plt.ylabel('Total Transaction Value')
 plt.title('Total Transaction Value for Healthcare by Branch')
-plt.xticks(rotation=45, fontsize=8)
+plt.xticks(rotation=0, fontsize=8) # Remove rotate x-axis labels for better visibility and adjust fontsize
 
+# Find the branch with the highest total healthcare transaction value
 highest_value_branch = sorted_healthcare_by_branch.idxmax()
 highest_value = sorted_healthcare_by_branch.max()
 
 plt.show()
 
+# Find the branch with the highest total healthcare transaction value
 print("Branch with the highest healthcare transaction value:", highest_value_branch)
 print("Total transaction value for the highest branch:", highest_value)
