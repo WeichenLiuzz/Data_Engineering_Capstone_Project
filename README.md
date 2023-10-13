@@ -69,6 +69,7 @@ For a visual representation of the project workflow and application requirements
 
 ## Visualizations
 This section encompasses the conclusive visual outputs generated from this project. It comprises a total of 7 images, consisting of five bar charts and two pie charts.<img src="Total Transaction value by Transaction Type.png"/>
+
 <img src="visualizations/Customer Count by State.png"/>
 <img src="Total Transaction Amount for Top 10 Customers.png"/>
 <img src="Percentage of Applications Approved for Self-Employed Apllicants.png"/>
