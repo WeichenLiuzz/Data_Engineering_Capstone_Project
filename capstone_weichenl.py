@@ -846,9 +846,7 @@ plt.show()
 It's set to 5 points above the original position (vertically).
 textcoords='offset points':This specifies the coordinate system for the xytext offset. 
 In this case, it's specified as offset points. """
-    
 
-    
 # REQ 5.4: Find and plot which branch processed the highest total dollar value of healthcare transactions.
 # Filter healthcare transactions
 healthcare_transactions = cdw_sapp_credit_card_df[cdw_sapp_credit_card_df['TRANSACTION_TYPE'] == 'Healthcare']
