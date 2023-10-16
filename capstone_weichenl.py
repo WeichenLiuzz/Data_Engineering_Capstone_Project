@@ -34,23 +34,17 @@ cdw_sapp_branch = cdw_sapp_branch_source_df \
 """ lit is a function that creates a literal column or expression. 
 In this case, it's used to create literal strings "(" , ")", and "-". """
 
-""" substring("BRANCH_PHONE", start, length) """
+""" substring("BRANCH_PHONE", start, length) 
+substr(expr, pos [, len] )
+pos is 1 based
+"""
 
 
 cdw_sapp_branch.printSchema()
 cdw_sapp_branch.show(2)
 
-
 # Load CDW_SAPP_CREDITCARD.JSON into a DataFrame
 cdw_sapp_credit_source_df = spark.read.json("C:/Users/vicky/Documents/perscholars/capstone/dataset/cdw_sapp_credit.json")
-
-
-""" To ensure that the month and day are in a two-digit format (e.g., 01 instead of 1), 
-we can use the lpad function in PySpark.  
-Use lpad to ensure that the MONTH and DAY columns have two digits, padding with a leading zero if needed. 
-This will ensure that the resulting "TIMEID" is in the format YYYYMMDD."""
-
-
 
 # Transformation based on the mapping document
 cdw_sapp_credit_card = cdw_sapp_credit_source_df \
@@ -64,10 +58,18 @@ cdw_sapp_credit_card = cdw_sapp_credit_source_df \
     .withColumn("TRANSACTION_VALUE", col("TRANSACTION_VALUE").cast("double")) \
     .withColumn("TRANSACTION_ID", col("TRANSACTION_ID").cast("int")) \
     .drop("DAY", "MONTH", "YEAR", "CUST_CC_NO") #do not need to extract them as separate columns
-    
+
+
+""" 
+To ensure that the month and day are in a two-digit format (e.g., 01 instead of 1), 
+we can use the lpad function in PySpark.  
+Use lpad to ensure that the MONTH and DAY columns have two digits, padding with a leading zero if needed. 
+This will ensure that the resulting "TIMEID" is in the format YYYYMMDD.
+"""
 
 cdw_sapp_credit_card.printSchema()
 cdw_sapp_credit_card.show(2)
+
 
 
 # Load CDW_SAPP_CUSTOMER.JSON into a DataFrame
@@ -82,13 +84,13 @@ random_area_codes = ['123', '456', '789']
 def generate_random_area_code():
     return random.choice(random_area_codes)
 
-""" This function uses the random.choice function to randomly select an area code from the defined random_area_codes list. """
+""" Use random.choice function to randomly select an area code from the defined random_area_codes list. """
 
 # Register the function as a UDF (User Defined Function)
 spark.udf.register("random_area_code", generate_random_area_code)
 
-""" This line registers the generate_random_area_code function as a User Defined Function (UDF) named "random_area_code" in the Spark context. 
-This UDF will allow us to generate a random area code for each row in a DataFrame. """
+"""The generate_random_area_code function is registered as a User Defined Function (UDF) named "random_area_code" in the Spark context. 
+This UDF allows to generate a random area code for each row in a DataFrame. """
 
 # Transformation based on the mapping document
 cdw_sapp_custmer = cdw_sapp_custmer_source_df \
@@ -113,7 +115,6 @@ cdw_sapp_custmer = cdw_sapp_custmer_source_df \
     .withColumn("LAST_UPDATED", col("LAST_UPDATED").cast("timestamp")) \
     .drop("STREET_NAME", "APT_NO", "RANDOM_AREA_CODE")
 
-
 """  a new column "RANDOM_AREA_CODE" is added to the DataFrame using the "random_area_code" UDF.
 we're using the expr function to execute the SQL expression "random_area_code()", 
 which invokes a user-defined function (UDF) called "random_area_code".
@@ -124,11 +125,16 @@ expr(): This function in Spark allows you to specify an expression using SQL-lik
 
 # Print schema and show code
 cdw_sapp_custmer.printSchema()
-cdw_sapp_custmer.show(20)
+cdw_sapp_custmer.show(2)
 
 
 
 # REQ1.2 Data loading into Database
+
+""" Create a Database in MySQL Workbench
+CREATE DATABASE IF NOT EXISTS creditcard_capstone; 
+"""
+
 # Write the transformed DataFrame to a target table.
 import wc_credential
 
@@ -174,8 +180,6 @@ cursor = conn.cursor()
 
 # Function to display transactions made by customers in a given zip code for a specific month and year
 
-# use triple quotes (""") to define a multi-line string
-
 def display_transactions_by_zip(year, month, zip_code):
     query = f"""
     SELECT *
@@ -199,7 +203,9 @@ def display_transactions_by_zip(year, month, zip_code):
 It allows embedding Python variables (year, month, and zip_code) directly into the SQL query 
 to create a dynamic query based on the input provided to the function. 
 The expressions inside curly braces {} are replaced with the values of the corresponding variables.
- """
+"""
+# Also, use triple quotes (""") to define a multi-line string
+
 
 # Function to display the number and total values of transactions for a given type
 def display_transactions_by_type(transaction_type):
@@ -236,6 +242,11 @@ def display_transactions_by_state(state):
         print(f"Total number of transactions in {state}: {num_transactions}")
         print(f"Total value of transactions in {state}: {total_value_str}")    
 
+
+""" 
+if __name__ is commonly used to include code that should only run when the script is executed directly 
+and not when it is imported as a module. 
+"""
 if __name__ == "__main__":
     while True:
         print("Select an option:")
@@ -309,6 +320,11 @@ if __name__ == "__main__":
         # Close the database connection
     conn.close()
 
+""" 
+try-except Block: This is a way to handle exceptions and prevent the program from crashing if something goes wrong.
+option.strip() is a method used to remove leading and trailing whitespaces (spaces, tabs, newlines) from the string.
+If the user entered nothing (pressed Enter without typing), option.strip() == "" will evaluate to True.
+ """
 
 # REQ 2.2 Customer Details Module
 import mysql.connector
@@ -361,7 +377,6 @@ def print_customer_details(customer):
 
 # Function to modify existing account details of a customer
 def modify_customer_account_details(cust_ssn):
-
     # Check if the provided SSN exists
     query_check_ssn = f"SELECT * FROM CDW_SAPP_CUSTOMER WHERE SSN = {cust_ssn};"
     cursor.execute(query_check_ssn)
@@ -466,7 +481,7 @@ def display_transactions_by_customer_and_dates(cust_ssn, start_date, end_date):
     FROM CDW_SAPP_CREDIT_CARD
     WHERE CUST_SSN = {cust_ssn} 
         AND TIMEID BETWEEN '{start_date}' AND '{end_date}'
-    ORDER BY SUBSTRING(TIMEID, 1, 4), SUBSTRING(TIMEID, 5, 2), SUBSTRING(TIMEID, 7, 2) DESC;
+    ORDER BY SUBSTRING(TIMEID, 1, 4) DESC, SUBSTRING(TIMEID, 5, 2) DESC, SUBSTRING(TIMEID, 7, 2) DESC;
     """
     cursor.execute(query)
     transactions = cursor.fetchall()
@@ -533,7 +548,7 @@ if __name__ == "__main__":
             print("Invalid input. Please enter a valid option number.")
 
 
-
+# REQ 3 Data Analysis and Visualization
 # REQ 3.1 Find and plot which transaction type has the highest transaction count
 import mysql.connector
 from mysql.connector import Error
@@ -686,7 +701,7 @@ print(f"Customer SSN: {int(customer_highest_transaction['CUST_SSN'])} with the h
 
 
 
-
+# REQ 4 Access to Loan API Endpoint
 # REQ 4.1 Create a Python program to GET (consume) data from the API endpoint for the loan application dataset.
 import requests
 import pandas as pd
@@ -709,7 +724,7 @@ loan_data = get_loan_data(api_endpoint)
 loan_data_df = pd.DataFrame(loan_data)
 
 # Display the first few rows
-loan_data_df.head()
+print(loan_data_df.head())
 
 
 # REQ 4.2 Find the status code of the above API endpoint.
@@ -744,7 +759,7 @@ print("Data successfully written to the RDBMS table.")
 
 
 
-# REQ 5.1 Find and plot the percentage of applications approved for self-employed applicants.
+# REQ 5 Data Analysis and Visualization for LOAN Application
 
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -826,6 +841,14 @@ plt.xticks(rotation=0) # Remove rotation for month labels
 plt.tight_layout()
 plt.show()
 
+
+""" xytext=(0, 5):This parameter specifies the offset of the text label from its original position. 
+It's set to 5 points above the original position (vertically).
+textcoords='offset points':This specifies the coordinate system for the xytext offset. 
+In this case, it's specified as offset points. """
+    
+
+    
 # REQ 5.4: Find and plot which branch processed the highest total dollar value of healthcare transactions.
 # Filter healthcare transactions
 healthcare_transactions = cdw_sapp_credit_card_df[cdw_sapp_credit_card_df['TRANSACTION_TYPE'] == 'Healthcare']
